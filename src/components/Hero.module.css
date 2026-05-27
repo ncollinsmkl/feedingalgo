@@ -1,0 +1,72 @@
+.hero {
+  background: var(--c-cream);
+  /* All four corners rounded to match Figma. A small margin separates
+     the hero card from the header so the top corners are visible. */
+  border-radius: 32px;
+  margin: 16px 16px 0;
+  overflow: hidden;
+}
+.inner {
+  display: grid;
+  grid-template-columns: 1.05fr 1fr;
+  gap: 32px;
+  align-items: center;
+  padding-top: 32px;
+  /* Reduced from 80px so the cereal bowl in Algo's image sits closer
+     to the Key Benefits row below — no awkward navy gap. */
+  padding-bottom: 32px;
+}
+.copy {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-top: 24px;
+}
+.logoImg {
+  max-width: 460px;
+  width: 100%;
+  height: auto;
+}
+.subtitleImg {
+  max-width: 510px;
+  width: 100%;
+  height: auto;
+  margin-top: -8px;
+}
+.lede {
+  font-size: 22px;
+  line-height: 1.4;
+  color: var(--c-text);
+  max-width: 560px;
+  margin: 12px 0 16px;
+  font-weight: 500;
+}
+.copy .btn-cta,
+.copy a.btn-cta,
+.copy :global(.btn-cta) {
+  align-self: flex-start;
+}
+.imageWrap {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.imageWrap img {
+  max-width: 100%;
+  width: 100%;
+  max-height: 660px;
+  object-fit: contain;
+}
+
+@media (max-width: 900px) {
+  .inner {
+    grid-template-columns: 1fr;
+    padding-bottom: 48px;
+  }
+  .imageWrap {
+    justify-content: center;
+  }
+  .imageWrap img {
+    max-height: 420px;
+  }
+}

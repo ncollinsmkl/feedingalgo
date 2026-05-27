@@ -1,0 +1,33 @@
+/* Algo / Strong Data — Design tokens
+ * Single source of truth for colors, type, spacing.
+ * Values extracted from Figma file yOZ1NOg8G03BCT4AUjf07q.
+ */
+:root {
+  /* Brand */
+  --c-navy: #0a2342;
+  --c-navy-2: #0e2c52;
+  --c-cream: #fdeedb;
+  --c-cream-light: #fff5e6;
+  --c-orange-cta: #e8633a;
+  --c-orange-cta-hover: #d2542d;
+  --c-text: #0a2342;
+  --c-text-muted: #4a5a78;
+  --c-white: #ffffff;
+
+  /* Cereal-C accent colors (match cereal images) */
+  --c-red: #d23a35;
+  --c-orange: #e89241;
+  --c-blue: #3aa0d2;
+  --c-green: #6ab04c;
+  --c-purple: #8c6fb1;
+
+  /* Type */
+  --font-display: "Fraunces", "Playfair Display", Georgia, serif;
+  --font-body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  /* Layout */
+  --max-w: 1280px;
+  --pad-x: clamp(20px, 4vw, 64px);
+  --radius-card: 24px;
+  --radius-btn: 999px;
+}

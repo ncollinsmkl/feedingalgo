@@ -1,0 +1,54 @@
+.banner {
+  position: fixed;
+  inset: auto 16px 16px 16px;
+  z-index: 200;
+  background: var(--c-cream);
+  color: var(--c-text);
+  border-radius: 16px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+  padding: 18px 22px;
+  max-width: 720px;
+  margin: 0 auto;
+}
+.content {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.content p {
+  margin: 0;
+  flex: 1 1 320px;
+  font-size: 14px;
+  line-height: 1.45;
+}
+.content a {
+  text-decoration: underline;
+  color: var(--c-navy);
+}
+.actions {
+  display: flex;
+  gap: 8px;
+}
+.accept,
+.reject {
+  font-weight: 700;
+  font-size: 14px;
+  border-radius: 999px;
+  padding: 10px 20px;
+}
+.accept {
+  background: var(--c-orange-cta);
+  color: var(--c-white);
+}
+.accept:hover {
+  background: var(--c-orange-cta-hover);
+}
+.reject {
+  background: transparent;
+  color: var(--c-navy);
+  border: 1px solid rgba(10, 35, 66, 0.3);
+}
+.reject:hover {
+  background: rgba(10, 35, 66, 0.05);
+}

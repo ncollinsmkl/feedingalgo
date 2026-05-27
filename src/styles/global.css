@@ -1,0 +1,97 @@
+/* Global resets + base type. Imports tokens. */
+@import "./tokens.css";
+
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&family=Inter:wght@400;500;600;700&display=swap");
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  padding: 0;
+  background: var(--c-navy);
+  color: var(--c-text);
+  font-family: var(--font-body);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Offset in-page anchors so sticky-header doesn't cover the heading. */
+section[id] {
+  scroll-margin-top: 96px;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  font-weight: 800;
+  line-height: 1.05;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+.container {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding-left: var(--pad-x);
+  padding-right: var(--pad-x);
+}
+
+/* Buttons */
+.btn-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px 36px;
+  background: var(--c-orange-cta);
+  color: var(--c-white);
+  font-weight: 700;
+  font-size: 18px;
+  letter-spacing: 0.06em;
+  border-radius: var(--radius-btn);
+  text-transform: uppercase;
+  transition: background 0.15s ease;
+}
+.btn-cta:hover {
+  background: var(--c-orange-cta-hover);
+}
+
+.btn-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 28px;
+  background: var(--c-navy);
+  color: var(--c-white);
+  font-weight: 600;
+  border-radius: var(--radius-btn);
+}
+.btn-pill:hover {
+  background: var(--c-navy-2);
+}

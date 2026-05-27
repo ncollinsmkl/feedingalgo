@@ -1,0 +1,116 @@
+.layout {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 28px;
+}
+.algo {
+  width: 100%;
+  height: auto;
+  max-height: 240px;
+  object-fit: contain;
+}
+.copy {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.copy h3 {
+  font-size: 32px;
+  color: var(--c-navy);
+  margin: 0;
+}
+.score {
+  font-size: 14px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--c-text-muted);
+  margin: 0;
+}
+.message {
+  font-size: 16px;
+  line-height: 1.55;
+  color: var(--c-text);
+  margin: 0 0 8px;
+}
+.formHeading {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--c-text-muted);
+  margin: 8px 0 4px;
+}
+.form {
+  display: grid;
+  gap: 12px;
+}
+.form label {
+  display: grid;
+  gap: 4px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--c-text);
+}
+.form input {
+  border: 1px solid rgba(10, 35, 66, 0.2);
+  background: #fff;
+  padding: 12px 14px;
+  border-radius: 10px;
+  font-size: 16px;
+  font-family: inherit;
+}
+.form input:focus {
+  outline: 2px solid var(--c-orange-cta);
+  outline-offset: 1px;
+}
+.form .btn-cta,
+.form :global(.btn-cta) {
+  margin-top: 6px;
+  width: 100%;
+}
+
+/* In-modal success state shown after a successful Google Form POST. */
+.successState {
+  background: rgba(10, 35, 66, 0.06);
+  border-radius: 12px;
+  padding: 16px 18px;
+  margin-top: 8px;
+}
+.successState h4 {
+  font-family: var(--font-display);
+  font-size: 22px;
+  color: var(--c-navy);
+  margin: 0 0 6px;
+}
+.successState p {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+/* Inline error message shown when the network POST fails. */
+.errorState {
+  margin: 12px 0 0;
+  padding: 10px 12px;
+  background: rgba(232, 99, 58, 0.12);
+  border-left: 3px solid var(--c-orange-cta);
+  border-radius: 6px;
+  font-size: 13px;
+  color: var(--c-text);
+}
+.errorState a {
+  color: var(--c-navy);
+  text-decoration: underline;
+  font-weight: 600;
+}
+
+@media (max-width: 640px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+  .algo {
+    max-height: 180px;
+    margin: 0 auto;
+  }
+}

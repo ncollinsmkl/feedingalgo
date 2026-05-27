@@ -1,0 +1,93 @@
+.section {
+  background: var(--c-navy);
+  padding: 64px 0;
+}
+.card {
+  background: var(--c-cream);
+  border-radius: 24px;
+  padding: 64px;
+  max-width: 720px;
+  margin: 0 auto;
+}
+.card h2 {
+  font-size: 36px;
+  color: var(--c-navy);
+  margin-bottom: 12px;
+}
+.lede {
+  font-size: 16px;
+  line-height: 1.55;
+  color: var(--c-text);
+  margin: 0 0 32px;
+}
+.form {
+  display: grid;
+  gap: 20px;
+}
+.form label {
+  display: grid;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--c-navy);
+}
+.form input {
+  font-family: inherit;
+  background: #fff;
+  border: 1px solid rgba(10, 35, 66, 0.2);
+  padding: 16px 18px;
+  border-radius: 10px;
+  font-size: 16px;
+  color: var(--c-text);
+}
+.form input:focus {
+  outline: 2px solid var(--c-orange-cta);
+  outline-offset: 1px;
+}
+.submit {
+  margin-top: 8px;
+  background: var(--c-navy);
+  color: var(--c-white);
+  padding: 18px;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 16px;
+}
+.submit:hover {
+  background: var(--c-navy-2);
+}
+.submit:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Friendly state shown after a successful submission. */
+.successState {
+  text-align: center;
+}
+.successState h2 {
+  font-size: 32px;
+  color: var(--c-navy);
+  margin-bottom: 12px;
+}
+
+/* Inline error message shown when the network POST fails. */
+.errorState {
+  margin: 12px 0 0;
+  padding: 12px 14px;
+  background: rgba(232, 99, 58, 0.12);
+  border-left: 3px solid var(--c-orange-cta);
+  border-radius: 6px;
+  font-size: 14px;
+  color: var(--c-text);
+}
+.errorState a {
+  color: var(--c-navy);
+  text-decoration: underline;
+  font-weight: 600;
+}
+
+@media (max-width: 640px) {
+  .card { padding: 32px 24px; }
+}

@@ -1,0 +1,56 @@
+.section {
+  background: var(--c-navy);
+  padding: 72px 0 96px;
+}
+.heading {
+  font-size: clamp(36px, 5vw, 64px);
+  color: var(--c-white);
+  text-align: center;
+  margin-bottom: 40px;
+}
+.sub {
+  display: block;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: clamp(16px, 1.6vw, 22px);
+  color: rgba(255, 255, 255, 0.85);
+  margin-top: 12px;
+}
+.frame {
+  position: relative;
+  width: min(900px, 100%);
+  aspect-ratio: 16 / 9;
+  margin: 0 auto;
+  border-radius: 20px;
+  overflow: hidden;
+  background: #000;
+}
+.iframe,
+.poster {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+}
+.poster {
+  background-size: cover;
+  background-position: center;
+  cursor: pointer;
+  padding: 0;
+}
+.playBtn {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: rgba(10, 35, 66, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+}

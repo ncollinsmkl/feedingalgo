@@ -1,0 +1,42 @@
+.page {
+  background: var(--c-cream);
+  min-height: 100vh;
+  padding: 64px 0 96px;
+  color: var(--c-text);
+}
+.page h1 {
+  font-size: clamp(36px, 5vw, 56px);
+  margin-bottom: 8px;
+}
+.page h2 {
+  font-size: 22px;
+  margin: 32px 0 8px;
+  color: var(--c-navy);
+}
+.page p,
+.page li {
+  font-size: 16px;
+  line-height: 1.6;
+}
+.page ul {
+  padding-left: 22px;
+}
+.meta {
+  color: var(--c-text-muted);
+  font-size: 14px;
+  margin-bottom: 24px;
+}
+.back {
+  display: inline-block;
+  font-size: 14px;
+  color: var(--c-navy);
+  margin-bottom: 24px;
+  text-decoration: underline;
+}
+.linkBtn {
+  background: transparent;
+  padding: 0;
+  text-decoration: underline;
+  color: var(--c-navy);
+  font: inherit;
+}

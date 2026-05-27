@@ -1,0 +1,354 @@
+.section {
+  background: var(--c-navy);
+  padding: 56px 0 96px;
+}
+.heading {
+  color: var(--c-white);
+  text-align: center;
+  font-size: clamp(36px, 5vw, 64px);
+  margin-bottom: 24px;
+}
+.sub {
+  display: block;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: clamp(16px, 1.6vw, 22px);
+  color: rgba(255, 255, 255, 0.85);
+  margin-top: 12px;
+}
+/* The whole audit (instruction banner + matrix + footer) lives in a
+   single light-tinted panel so the section reads as one cohesive unit. */
+.auditPanel {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  overflow: hidden;
+  margin-top: 24px;
+}
+.auditPanelHead {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--c-white);
+  text-align: center;
+  padding: 18px 24px;
+  font-size: 18px;
+  font-weight: 500;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+.auditPanelBody {
+  padding: 32px;
+}
+
+.embedded {
+  background: var(--c-navy);
+  padding: 24px;
+  border-radius: 16px;
+}
+
+/* Shared footer for matrix + accordion variants.
+   Stacked + centred — progress text above, CTA button below. */
+.footerRow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  margin-top: 32px;
+}
+.progress {
+  color: rgba(255, 255, 255, 0.8);
+  margin: 0;
+}
+.swatch {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  vertical-align: middle;
+  margin-right: 8px;
+}
+
+/* ---------- matrix variant ---------- */
+.matrixWrap {
+  width: 100%;
+}
+/* Gradient progression row — sits inside the matrix thead, directly
+   below the row of Algo images. The gradient bar spans the full width
+   of the four image columns as one continuous strip. "Hungry" and
+   "Feasting" sit on top of the gradient, centred under the sad bear
+   (col 1) and the very-happy bear (col 4) respectively. */
+.gradientRow th {
+  padding: 4px 8px 14px !important;
+}
+.gradientCell {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+.gradientBar {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  align-items: center;
+  width: 100%;
+  min-height: 36px;
+  padding: 0 12px;
+  border-radius: 18px;
+  background: linear-gradient(
+    to right,
+    var(--c-red) 0%,
+    var(--c-orange) 35%,
+    var(--c-blue) 65%,
+    var(--c-green) 100%
+  );
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+.gradientLabel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--c-white);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+.matrix {
+  width: 100%;
+  /* Fixed layout = column widths driven by <colgroup>, NOT by cell
+     content. This is what keeps every cell the same size. */
+  table-layout: fixed;
+  border-collapse: separate;
+  border-spacing: 8px;
+}
+.colLabel { width: 160px; }
+.colData  { width: auto; }  /* the remaining width is split evenly across the 4 data cols */
+
+.matrix th {
+  color: rgba(255, 255, 255, 0.9);
+  text-align: left;
+  padding: 8px 12px;
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.matrix thead th {
+  text-align: center;
+  vertical-align: bottom;
+}
+.matrixCorner {
+  width: 160px;
+}
+/* Image-driven column headers. */
+.matrixColHead {
+  padding-bottom: 12px !important;
+}
+.matrixColImg {
+  display: block;
+  margin: 0 auto;
+  height: 72px;
+  width: auto;
+  object-fit: contain;
+}
+/* .matrixColLabel was removed — per-column text labels are no longer
+   shown; the Hungry → Feasting gradient above the table is the only
+   indicator of scoring direction. */
+.matrixRowLabel {
+  color: var(--c-white) !important;
+  font-size: 18px !important;
+  text-transform: none !important;
+  letter-spacing: 0 !important;
+  padding-right: 8px !important;
+}
+.cell {
+  width: 100%;
+  /* Same min-height + flex centering across every cell so they look
+     visually identical even when option text wraps differently. */
+  min-height: 110px;
+  padding: 14px 16px;
+  background: var(--c-cream);
+  border-radius: 14px;
+  color: var(--c-text);
+  font-size: 14px;
+  line-height: 1.4;
+  text-align: left;
+  transition: transform 0.1s ease, box-shadow 0.15s ease;
+  display: flex;
+  align-items: center;
+}
+.cell:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+}
+.cellSelected {
+  color: var(--c-white);
+  font-weight: 600;
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.6) inset;
+}
+
+/* ---------- stepper variant ---------- */
+.stepper {
+  background: var(--c-cream);
+  border-radius: 24px;
+  padding: 32px;
+  color: var(--c-text);
+  max-width: 880px;
+  margin: 0 auto;
+}
+.stepperBar {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 24px;
+}
+.stepDot {
+  flex: 1;
+  height: 6px;
+  border-radius: 3px;
+  background: rgba(10, 35, 66, 0.15);
+}
+.stepDotActive {
+  background: var(--c-orange-cta);
+}
+.stepperTitle {
+  font-size: 40px;
+  color: var(--c-navy);
+  margin-bottom: 24px;
+}
+.stepperOptions {
+  display: grid;
+  /* grid-auto-rows: 1fr → every option card in the stepper has the
+     same height, even if the option text length varies. */
+  grid-auto-rows: 1fr;
+  gap: 12px;
+}
+.optCard {
+  text-align: left;
+  padding: 16px 20px;
+  border-radius: 14px;
+  background: var(--c-cream-light);
+  border: 2px solid transparent;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 16px;
+  /* Min-height guarantees consistency across all four cards on every
+     viewport — keeps the stepper feeling polished on mobile. */
+  min-height: 96px;
+  height: 100%;
+}
+.optCard:hover {
+  background: #fff;
+}
+.optCardSelected {
+  background: #fff;
+  font-weight: 600;
+}
+.optHeader {
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--c-text-muted);
+}
+.stepperNav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 28px;
+  gap: 16px;
+}
+.stepperNav .progress {
+  color: var(--c-text-muted);
+}
+.btnGhost {
+  background: transparent;
+  color: var(--c-navy);
+  padding: 12px 20px;
+  border-radius: 999px;
+  font-weight: 600;
+}
+.btnGhost:disabled {
+  opacity: 0.35;
+}
+
+/* ---------- accordion variant ---------- */
+.accordion {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 920px;
+  margin: 0 auto;
+}
+.accItem {
+  background: var(--c-cream);
+  border-radius: 18px;
+  border-left: 6px solid var(--accent);
+  overflow: hidden;
+}
+.accAnswered {
+  background: var(--c-cream-light);
+}
+.accHeader {
+  display: grid;
+  grid-template-columns: auto 1fr auto auto;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  padding: 18px 24px;
+  background: transparent;
+  color: var(--c-navy);
+  text-align: left;
+}
+.accTitle {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 24px;
+}
+.accTick {
+  font-size: 14px;
+  color: var(--c-text-muted);
+}
+.accChevron {
+  font-size: 24px;
+  width: 28px;
+  text-align: center;
+}
+.accBody {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  padding: 0 24px 20px;
+}
+.accOpt {
+  background: #fff;
+  border-radius: 12px;
+  padding: 14px 16px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  border: 2px solid transparent;
+}
+.accOpt strong {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--c-text-muted);
+}
+.accOptSelected {
+  border-color: var(--accent);
+}
+
+/* shared disabled */
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+@media (max-width: 700px) {
+  .accBody {
+    grid-template-columns: 1fr;
+  }
+  .auditPanelBody {
+    padding: 16px;
+  }
+  /* On mobile the live site swaps matrix → stepper (handled in AlgoAudit.tsx),
+     so the matrix-specific table styles no longer apply here. */
+}
