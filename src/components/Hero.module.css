@@ -3,7 +3,6 @@
   /* All four corners rounded to match Figma. A small margin separates
      the hero card from the header so the top corners are visible. */
   border-radius: 32px;
-  margin: 16px 16px 0;
   overflow: hidden;
 }
 .inner {
