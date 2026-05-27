@@ -51,17 +51,17 @@ export const FIVE_CS: CDef[] = [
     blurb:
       "We harvest only with full permission. No rubbish additives or artificial filler, just pure, legal, healthy data.",
     modalBody:
-      "Consent is about establishing the legal and ethical right to use the data you collect. It's the foundation everything else is built on — without it, the rest of the recipe falls apart.",
+      "Consent is about establishing the legal and ethical right to use the data you collect. It's the foundation everything else is built on and without it, the rest of the recipe falls apart.",
     solutions: [
       {
         name: "Advanced Consent Mode",
         description:
-          "Google's smart consent signalling — when a user opts out we respect it, but Algo's bowl still gets topped up with modelled data so measurement and bidding don't go hungry. Compliance without the empty calories.",
+          "Google's smart consent signalling. When a user opts out we respect it, but Algo's bowl still gets topped up with modelled data so measurement and bidding don't go hungry. Compliance without the empty calories.",
       },
       {
         name: "CMP Support (Consent Management Platform)",
         description:
-          "The branded pop-up that greets every visitor with a polite \"cookies?\" — set up properly so preferences are captured, respected, and signalled to every downstream tool. The welcoming host who checks dietary requirements before serving anything.",
+          "The branded pop-up that greets every visitor with a polite \"cookies?\". Set up properly so preferences are captured, respected, and signalled to every downstream tool. The welcoming host who checks dietary requirements before serving anything.",
       },
     ],
     cereal: "/assets/Image_Cereal_Red_C.png",
@@ -73,7 +73,7 @@ export const FIVE_CS: CDef[] = [
     blurb:
       "We pluck the ripest signals from every channel, skipping the “filler” to ensure your data set is nutrient-dense and relevant.",
     modalBody:
-      "Collect is about pulling in the relevant and useful data points — and only those. Better signals in means better decisions out.",
+      "Collect is about pulling in the relevant and useful data points, and only those. Better signals in means better decisions out.",
     solutions: [
       {
         name: "Tagging audits",
@@ -83,7 +83,7 @@ export const FIVE_CS: CDef[] = [
       {
         name: "Enhanced Conversions",
         description:
-          "Hashed first-party customer data passed alongside each conversion, so Google can match more sales back to the click that started them — even after cookies have crumbled. Heartier ingredients, fewer missed meals.",
+          "Hashed first-party customer data passed alongside each conversion, so Google can match more sales back to the click that started them even after cookies have crumbled. Heartier ingredients, fewer missed meals.",
       },
       {
         name: "Google Tag Gateway",
@@ -93,17 +93,17 @@ export const FIVE_CS: CDef[] = [
       {
         name: "Server-side Google Tag Manager",
         description:
-          "Tag execution moved off the browser and onto a server you control. Faster pages, cleaner data, and total say over what gets shared with whom — the kitchen finally has a head chef.",
+          "Tag execution moved off the browser and onto a server you control. Faster pages, cleaner data, and total say over what gets shared with whom. The kitchen finally has a head chef.",
       },
       {
         name: "CAPI (Conversions API)",
         description:
-          "A server-to-server pipeline that sends conversion data straight from your back end to ad platforms — no browser required. The chef-to-platform delivery van that doesn't depend on cookie crumbs surviving the trip.",
+          "A server-to-server pipeline that sends conversion data straight from your back end to ad platforms with no browser required. The chef-to-platform delivery van that doesn't depend on cookie crumbs surviving the trip.",
         subItems: [
           {
             name: "Facebook (Meta CAPI)",
             description:
-              "Conversions delivered direct to Meta — Facebook, Instagram and Messenger — so attribution survives iOS restrictions and ad-blockers.",
+              "Conversions delivered direct to Meta (Facebook), Instagram and Messenger — so attribution survives iOS restrictions and ad-blockers.",
           },
           {
             name: "TikTok (Events API)",
@@ -142,7 +142,7 @@ export const FIVE_CS: CDef[] = [
       {
         name: "Data Matching",
         description:
-          "Joining records from different systems — CRM, web, offline — onto a single customer record using emails, phone numbers, hashed identifiers or anything they share. Putting all the ingredients in the same labelled jar.",
+          "Joining records from different systems like CRM, web and offline into a single customer record using emails, phone numbers, hashed identifiers or anything they share. Putting all the ingredients in the same labelled jar.",
       },
     ],
     cereal: "/assets/Image_Cereal_Blue_C.png",
@@ -169,7 +169,7 @@ export const FIVE_CS: CDef[] = [
       {
         name: "Reporting solutions",
         description:
-          "Looker Studio, Power BI, Tableau — the serving plates that turn warehoused data into dashboards stakeholders can actually read over their morning coffee.",
+          "Looker Studio, Power BI and Tableau, these are the serving plates that turn warehoused data into dashboards stakeholders can actually read over their morning coffee.",
       },
     ],
     cereal: "/assets/Image_Cereal_Green_C.png",
@@ -181,12 +181,12 @@ export const FIVE_CS: CDef[] = [
     blurb:
       "We use the best tech to turn ingredients into action, ensuring your data is ready to activate and fuel results across every channel.",
     modalBody:
-      "Connect is about activating the data to speak to a brand's audience — turning insight into impact across every channel.",
+      "Connect is about activating the data to speak to a brand's audience, turning insight into impact across every channel.",
     solutions: [
       {
         name: "Google Analytics excellence",
         description:
-          "A properly configured GA4 — clean events, meaningful audiences, calibrated conversions — feeding consistent signals into every platform you activate. The well-set table that turns ingredients into a meal.",
+          "A properly configured GA4 means clean events, meaningful audiences and calibrated conversions that can feed consistent signals into every platform you activate. The well-set table that turns ingredients into a meal.",
       },
       {
         name: "Audience Management Platforms",
@@ -196,12 +196,12 @@ export const FIVE_CS: CDef[] = [
       {
         name: "Adobe Analytics / Adobe CJA",
         description:
-          "The Adobe side of the analytics aisle — Customer Journey Analytics built specifically for joined-up reporting across web, app and offline. A complementary cookbook to GA4 when your stack already lives in Adobe.",
+          "The Adobe side of the analytics aisle. Customer Journey Analytics built specifically for joined-up reporting across web, app and offline. A complementary cookbook to GA4 when your stack already lives in Adobe.",
       },
       {
         name: "Offline data",
         description:
-          "In-store purchases, call-centre conversions and CRM lifecycle events fed back up to ad platforms so optimisation learns from what really happened — not just what happened in a browser tab. Receipts from every till added back to the recipe.",
+          "In-store purchases, call-centre conversions and CRM lifecycle events fed back up to ad platforms so optimisation learns from what really happened, not just what happened in a browser tab. Receipts from every till added back to the recipe.",
       },
     ],
     cereal: "/assets/Image_Cereal_Purple_C.png",

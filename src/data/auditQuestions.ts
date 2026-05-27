@@ -64,14 +64,14 @@ export const AUDIT_ROWS: AuditRow[] = [
       "No standardised naming convention exists across marketing teams",
       "Basic UTM mapping and platform event structures are loosely followed",
       "Dedicated Taxonomy support ensures consistent naming across channels",
-      "An automated, enterprise-wirse taxonomy governs all data feeds seamlessly",
+      "An automated, enterprise-wise taxonomy governs all data feeds seamlessly",
     ],
   },
   {
     key: "combine",
     title: "Combine",
     options: [
-      "Data lives in seperate silos with manual spreadsheet exports",
+      "Data lives in separate silos with manual spreadsheet exports",
       "Native platform integrations link basic reporting and analytics views",
       "Raw marketing and web data are automatically centralised into a cloud data warehouse (like BigQuery)",
       "Cloud data warehouse blends offline CRM data with real-time media feeds for a complete view",
@@ -84,7 +84,7 @@ export const AUDIT_ROWS: AuditRow[] = [
       "Data is not shared directly with ad platforms for targeting",
       "Utilising audiences in Google Analytics to sync basic remarketing lists to Google Ads",
       "First-party data flows directly into the broader adtech ecosystem for custom targeting",
-      "Utilisng tools to instantly activate data across the entire media ecosystem",
+      "Utilising tools to instantly activate data across the entire media ecosystem",
     ],
   },
 ];

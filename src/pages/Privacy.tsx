@@ -23,7 +23,7 @@ export default function Privacy() {
         <p>
           This website (“Strong Data”) is operated by the DAAT team. If you
           have any questions about this policy you can reach us at{" "}
-          <a href="mailto:test@test.com">test@test.com</a>.
+          <a href="mailto:team@feedingalgo.com">team@feedingalgo.com</a>.
         </p>
 
         <h2>2. What we collect</h2>
@@ -68,19 +68,9 @@ export default function Privacy() {
 
         <h2>5. Your rights</h2>
         <p>
-          You can change your cookie choice at any time via the{" "}
-          <button
-            type="button"
-            className={styles.linkBtn}
-            onClick={() =>
-              window.dispatchEvent(new CustomEvent("open-consent-banner"))
-            }
-          >
-            Cookie preferences
-          </button>{" "}
-          link, also available in the site footer. You also have the right to
+          You can change your cookie choice at any time via the "Cookie Preference" link in the site footer. You also have the right to 
           ask us what we hold about you, to correct it, or to have it deleted —
-          contact us at <a href="mailto:test@test.com">test@test.com</a>.
+          contact us at <a href="mailto:team@feedingalgo.com">team@feedingalgo.com</a>.
         </p>
 
         <h2>6. Changes</h2>
