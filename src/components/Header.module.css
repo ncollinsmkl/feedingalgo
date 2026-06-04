@@ -17,10 +17,9 @@
   font-weight: 800;
   font-size: 32px;
   color: var(--c-white);
-  line_height: 33px;
+  line-height: 33px;
   padding-right: 22px;
   letter-spacing: -0.01em;
-
 }
 .nav {
   display: flex;
