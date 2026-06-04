@@ -256,11 +256,11 @@
 }
 .stepperNav .progress {
   color: var(--c-text-muted);
+  text-wrap-mode: nowrap;
 }
 .btnGhost {
   background: transparent;
   color: var(--c-navy);
-  padding: 12px 20px;
   border-radius: 999px;
   font-weight: 600;
 }
