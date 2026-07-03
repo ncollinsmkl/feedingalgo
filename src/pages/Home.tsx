@@ -4,7 +4,7 @@
  */
 import Header from "../components/Header";
 import Hero from "../components/Hero";
-import KeyBenefits from "../components/KeyBenefits";
+/** import KeyBenefits from "../components/KeyBenefits"; */
 import MeetAlgo from "../components/MeetAlgo";
 import MakingStrongData from "../components/MakingStrongData";
 import AlgoAudit from "../components/AlgoAudit";
@@ -17,7 +17,6 @@ export default function Home() {
     <>
       <Header />
       <Hero />
-      <KeyBenefits />
       <MeetAlgo />
       <MakingStrongData />
       {/*
