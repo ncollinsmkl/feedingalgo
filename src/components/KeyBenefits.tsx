@@ -5,14 +5,12 @@
 
 import styles from "./KeyBenefits.module.css";
 
-/**
 const BENEFITS = [
   { icon: "/assets/Image_Icon_Measurement.png", title: "Better Media Measurement" },
   { icon: "/assets/Image_Icon_Targeting.png", title: "Better Media Targeting" },
   { icon: "/assets/Image_Icon_Optimisation.png", title: "Better Media Optimisation" },
   { icon: "/assets/Image_Icon_ROI.png", title: "Maximum Media ROI" },
 ];
-*/
 
 export default function KeyBenefits() {
   return (
