@@ -25,7 +25,7 @@ export default function Footer() {
             Cookie preferences
           </button>
         </nav>
-        <p className={styles.copy}>© 2026 STRONG DATA</p>
+        <p className={styles.copy}>2026 STRONG DATA</p>
       </div>
     </footer>
   );

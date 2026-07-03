@@ -1,7 +1,8 @@
-/**
+/** 
+
  * KeyBenefits — 4-card row sitting under the hero.
  * Maps to Figma frame 96:162.
- */
+
 import styles from "./KeyBenefits.module.css";
 
 const BENEFITS = [
@@ -30,3 +31,4 @@ export default function KeyBenefits() {
     </section>
   );
 }
+*/
