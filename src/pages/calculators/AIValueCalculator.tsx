@@ -1,15 +1,274 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { Link } from "react-router-dom";
 import logoImg from "../../assets/hero.png";
 import heroImg from "../../assets/ai_value_algo_hero.png";
 
+interface FeatureDef {
+  id: string;
+  name: string;
+  desc: string;
+  group: string;
+  groupIcon: string;
+  channel?: "search" | "video";
+  loUplift: number;
+  hiUplift: number;
+}
+
+const AI_FEATURES: FeatureDef[] = [
+  // Durable AI Foundations
+  {
+    id: "measurement_foundation",
+    name: "Measurement Foundation (Google tag + GA4)",
+    desc: "Robust sitewide tagging via the Google tag and GA4, the most essential component of the AI measurement stack.",
+    group: "Durable AI Foundations",
+    groupIcon: "🧱",
+    loUplift: 0.05,
+    hiUplift: 0.10
+  },
+  {
+    id: "enhanced_conv",
+    name: "Enhanced Conversions",
+    desc: "Unlock higher quality and more accurate conversion data, providing significant long-term benefit for all AI-powered bidding.",
+    group: "Durable AI Foundations",
+    groupIcon: "🧱",
+    loUplift: 0.05,
+    hiUplift: 0.12
+  },
+  {
+    id: "consent_mode",
+    name: "Consent Mode",
+    desc: "Collects & communicates consent signals while preserving comprehensive measurement via modelling.",
+    group: "Durable AI Foundations",
+    groupIcon: "🧱",
+    loUplift: 0.03,
+    hiUplift: 0.08
+  },
+  // Search & Performance
+  {
+    id: "pmax",
+    name: "Performance Max (PMax)",
+    desc: "Maximise conversions across all Google channels using real-time AI bidding & creative optimization.",
+    group: "AI-Powered Search & Performance",
+    groupIcon: "🔍",
+    channel: "search",
+    loUplift: 0.10,
+    hiUplift: 0.18
+  },
+  {
+    id: "broad_match",
+    name: "Broad Match + Smart Bidding",
+    desc: "Expand keyword reach and capture new intent by pairing broad match keywords with AI Smart Bidding.",
+    group: "AI-Powered Search & Performance",
+    groupIcon: "🔍",
+    channel: "search",
+    loUplift: 0.08,
+    hiUplift: 0.15
+  },
+  {
+    id: "vbb",
+    name: "Value-Based Bidding (VBB)",
+    desc: "Steer AI bidding towards high-value conversions, profit margins, or Customer Lifetime Value.",
+    group: "AI-Powered Search & Performance",
+    groupIcon: "🔍",
+    channel: "search",
+    loUplift: 0.10,
+    hiUplift: 0.20
+  },
+  {
+    id: "demand_gen",
+    name: "Demand Gen",
+    desc: "AI-driven visual ad formats across YouTube, Discover, and Gmail to capture mid-funnel demand.",
+    group: "AI-Powered Search & Performance",
+    groupIcon: "🔍",
+    channel: "search",
+    loUplift: 0.06,
+    hiUplift: 0.14
+  },
+  // Video
+  {
+    id: "video_action",
+    name: "Video Action / Video Reach Campaigns",
+    desc: "Drive action or efficient reach on YouTube using Google AI for creative variations and audience targeting.",
+    group: "AI-Powered Video",
+    groupIcon: "🎬",
+    channel: "video",
+    loUplift: 0.08,
+    hiUplift: 0.15
+  },
+  {
+    id: "youtube_select",
+    name: "YouTube Select & AI Contextual Targeting",
+    desc: "Access top-performing YouTube inventory with AI contextual and sentiment alignment.",
+    group: "AI-Powered Video",
+    groupIcon: "🎬",
+    channel: "video",
+    loUplift: 0.05,
+    hiUplift: 0.10
+  },
+  // Customer & Predictive AI
+  {
+    id: "first_party_data",
+    name: "First-Party Data / Customer Match",
+    desc: "Fuel AI algorithms with high-intent customer match lists and CRM signals.",
+    group: "Advanced Customer & Predictive AI",
+    groupIcon: "🔮",
+    loUplift: 0.07,
+    hiUplift: 0.15
+  },
+  {
+    id: "propensity_modelling",
+    name: "Propensity Modelling & Predictive Audiences",
+    desc: "Target users most likely to convert or purchase again using predictive machine learning models.",
+    group: "Advanced Customer & Predictive AI",
+    groupIcon: "🔮",
+    loUplift: 0.08,
+    hiUplift: 0.16
+  }
+];
+
+const ADOPT_LABELS: Record<number, string> = {
+  0: "Not implemented",
+  25: "Limited testing",
+  50: "Scaling adoption",
+  75: "Advanced",
+  100: "Fully implemented"
+};
+
+const ADOPT_COLORS: Record<number, string> = {
+  0: "var(--red)",
+  25: "#E08A3E",
+  50: "var(--collect)",
+  75: "#8FB84A",
+  100: "var(--green)"
+};
+
+const ADOPT_BG: Record<number, string> = {
+  0: "rgba(225,92,79,0.1)",
+  25: "rgba(224,138,62,0.1)",
+  50: "rgba(239,154,59,0.12)",
+  75: "rgba(143,184,74,0.12)",
+  100: "rgba(90,169,107,0.1)"
+};
+
+function fmt(n: number | null | undefined): string {
+  if (n == null || isNaN(n)) return "—";
+  const round = Math.round(n);
+  if (round >= 1000000) return (round / 1000000).toFixed(1) + "M";
+  if (round >= 1000) return (round / 1000).toFixed(1) + "K";
+  return round.toLocaleString();
+}
+
 export default function AIValueCalculator() {
   const [currentStep, setCurrentStep] = useState<number>(1);
+
+  // Adoption & NA States
+  const [featureState, setFeatureState] = useState<Record<string, { adoption: number; na: boolean }>>(() => {
+    const initial: Record<string, { adoption: number; na: boolean }> = {};
+    AI_FEATURES.forEach(f => {
+      initial[f.id] = { adoption: 0, na: false };
+    });
+    return initial;
+  });
+
+  // Channel filters for Step 1
+  const [filterSearch, setFilterSearch] = useState<boolean>(true);
+  const [filterVideo, setFilterVideo] = useState<boolean>(true);
+
+  // Performance inputs for Step 2
+  const [useBaseline, setUseBaseline] = useState<boolean>(true);
+  const [sessionsInput, setSessionsInput] = useState<string>("");
+  const [conversionsInput, setConversionsInput] = useState<string>("");
+  const [aovInput, setAovInput] = useState<string>("100");
 
   const goToStep = (stepNumber: number) => {
     setCurrentStep(stepNumber);
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
+
+  const handleSliderChange = (id: string, value: number) => {
+    setFeatureState(prev => ({
+      ...prev,
+      [id]: { ...prev[id], adoption: value }
+    }));
+  };
+
+  const handleNaToggle = (id: string, checked: boolean) => {
+    setFeatureState(prev => ({
+      ...prev,
+      [id]: { ...prev[id], na: checked }
+    }));
+  };
+
+  // Grouped Features for Step 1
+  const groupedFeatures = useMemo(() => {
+    const groups: Record<string, { icon: string; items: FeatureDef[] }> = {};
+
+    AI_FEATURES.forEach(f => {
+      if (f.channel === "search" && !filterSearch) return;
+      if (f.channel === "video" && !filterVideo) return;
+
+      if (!groups[f.group]) {
+        groups[f.group] = { icon: f.groupIcon, items: [] };
+      }
+      groups[f.group].items.push(f);
+    });
+
+    return groups;
+  }, [filterSearch, filterVideo]);
+
+  // Results Calculation for Step 3
+  const results = useMemo(() => {
+    const baseConversions = parseFloat(conversionsInput) || (useBaseline ? 5000 : 0);
+    const baseSessions = parseFloat(sessionsInput) || (useBaseline ? 500000 : 0);
+    const aov = parseFloat(aovInput) || 100;
+
+    let totalIncConversions = 0;
+
+    const breakdown: Array<{
+      feature: FeatureDef;
+      adoption: number;
+      avgUpliftPct: number;
+      incConversions: number;
+      incRevenue: number;
+    }> = [];
+
+    AI_FEATURES.forEach(f => {
+      if (f.channel === "search" && !filterSearch) return;
+      if (f.channel === "video" && !filterVideo) return;
+
+      const st = featureState[f.id] || { adoption: 0, na: false };
+      if (st.na || st.adoption >= 100) return;
+
+      const unlockedRatio = (100 - st.adoption) / 100;
+      const avgUplift = (f.loUplift + f.hiUplift) / 2;
+      const incConv = baseConversions * avgUplift * unlockedRatio;
+
+      totalIncConversions += incConv;
+
+      breakdown.push({
+        feature: f,
+        adoption: st.adoption,
+        avgUpliftPct: avgUplift * 100,
+        incConversions: incConv,
+        incRevenue: incConv * aov
+      });
+    });
+
+    const newConversions = baseConversions + totalIncConversions;
+    const overallUpliftPct = baseConversions > 0 ? (totalIncConversions / baseConversions) * 100 : 0;
+    const totalIncRevenue = totalIncConversions * aov;
+
+    return {
+      baseSessions,
+      baseConversions,
+      newConversions,
+      totalIncConversions,
+      overallUpliftPct,
+      totalIncRevenue,
+      aov,
+      breakdown
+    };
+  }, [sessionsInput, conversionsInput, aovInput, useBaseline, filterSearch, filterVideo, featureState]);
 
   return (
     <div className="calculator-page">
@@ -81,7 +340,7 @@ export default function AIValueCalculator() {
           </div>
         </div>
 
-        {/* STEP 1 */}
+        {/* STEP 1: Feature Adoption */}
         {currentStep === 1 && (
           <div className="step active">
             <div className="card">
@@ -95,13 +354,24 @@ export default function AIValueCalculator() {
                 </div>
               </div>
               <div className="toggle-pills">
-                <input type="checkbox" id="ff_search" defaultChecked />
+                <input
+                  type="checkbox"
+                  id="ff_search"
+                  checked={filterSearch}
+                  onChange={e => setFilterSearch(e.target.checked)}
+                />
                 <label htmlFor="ff_search">🔍 Search &amp; Performance</label>
-                <input type="checkbox" id="ff_video" defaultChecked />
+
+                <input
+                  type="checkbox"
+                  id="ff_video"
+                  checked={filterVideo}
+                  onChange={e => setFilterVideo(e.target.checked)}
+                />
                 <label htmlFor="ff_video">🎬 Video</label>
               </div>
               <div className="mode-hint" id="featureFilterHint">
-                💡 Showing all ingredients, untick a channel to hide its features from the list below.
+                💡 Showing all ingredients. Untick a channel above to hide its features from the list below.
               </div>
             </div>
 
@@ -115,7 +385,70 @@ export default function AIValueCalculator() {
                   </div>
                 </div>
               </div>
-              <div id="featuresContainer" />
+
+              {Object.entries(groupedFeatures).map(([groupName, groupData]) => (
+                <div key={groupName} style={{ marginBottom: "1.5rem" }}>
+                  <div className="ai-group-head">
+                    <span className="gh-icon">{groupData.icon}</span>
+                    <span className="gh-title">{groupName}</span>
+                  </div>
+
+                  {groupData.items.map(f => {
+                    const st = featureState[f.id] || { adoption: 0, na: false };
+                    return (
+                      <div className="feature-row" key={f.id}>
+                        <div>
+                          <div className="feature-name-row">
+                            <div className="feature-name">{f.name}</div>
+                            <div className="na-toggle-inline">
+                              <input
+                                type="checkbox"
+                                id={`${f.id}_na`}
+                                checked={st.na}
+                                onChange={e => handleNaToggle(f.id, e.target.checked)}
+                              />
+                              <label htmlFor={`${f.id}_na`}>Not applicable</label>
+                            </div>
+                          </div>
+                          <div className="feature-desc">{f.desc}</div>
+                        </div>
+
+                        <div className={`adopt-slider-wrap ${st.na ? "is-na" : ""}`}>
+                          <input
+                            type="range"
+                            min="0"
+                            max="100"
+                            step="25"
+                            value={st.adoption}
+                            disabled={st.na}
+                            className="adopt-slider"
+                            style={{ accentColor: "var(--navy)" }}
+                            onChange={e => handleSliderChange(f.id, parseInt(e.target.value))}
+                          />
+                          <div className="adopt-ticks">
+                            <span>0%</span><span>25%</span><span>50%</span><span>75%</span><span>100%</span>
+                          </div>
+                          <div
+                            className="adopt-readout"
+                            style={{
+                              color: st.na ? "var(--muted)" : ADOPT_COLORS[st.adoption],
+                              background: st.na ? "rgba(107,114,128,0.08)" : ADOPT_BG[st.adoption]
+                            }}
+                          >
+                            {st.na ? (
+                              "Not applicable"
+                            ) : (
+                              <>
+                                <span className="ar-pct">{st.adoption}%</span> {ADOPT_LABELS[st.adoption]}
+                              </>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              ))}
             </div>
 
             <div className="btn-actions">
@@ -127,7 +460,7 @@ export default function AIValueCalculator() {
           </div>
         )}
 
-        {/* STEP 2 */}
+        {/* STEP 2: Current Performance Inputs */}
         {currentStep === 2 && (
           <div className="step active">
             <div className="card">
@@ -135,23 +468,22 @@ export default function AIValueCalculator() {
                 <div className="card-icon">🎛️</div>
                 <div>
                   <div className="card-title">How would you like to model usage?</div>
-                  <div className="card-subtitle">Use our industry baseline, or select the marketing channels you're active in to tailor the inputs</div>
+                  <div className="card-subtitle">Use our industry baseline, or enter your own figures</div>
                 </div>
               </div>
 
               <div className="toggle-pills">
-                <input type="checkbox" id="ch_baseline" className="baseline-check" defaultChecked />
+                <input
+                  type="checkbox"
+                  id="ch_baseline"
+                  className="baseline-check"
+                  checked={useBaseline}
+                  onChange={e => setUseBaseline(e.target.checked)}
+                />
                 <label htmlFor="ch_baseline">📐 Use baseline assumptions</label>
-                <span className="mode-or">or select channels</span>
-                <input type="checkbox" id="ch_search" />
-                <label htmlFor="ch_search">🔍 Search</label>
-                <input type="checkbox" id="ch_video" />
-                <label htmlFor="ch_video">🎬 Video</label>
-                <input type="checkbox" id="ch_social" />
-                <label htmlFor="ch_social">📱 Social</label>
               </div>
-              <div className="mode-hint" id="modeHint">
-                💡 <strong>Baseline assumptions</strong> pre-fill every field with industry averages so you can see an indicative result instantly. Switch to channel selection to enter your own figures.
+              <div className="mode-hint">
+                💡 <strong>Baseline assumptions</strong> pre-fill every field with industry averages so you can see an indicative result instantly.
               </div>
             </div>
 
@@ -160,77 +492,48 @@ export default function AIValueCalculator() {
                 <div className="card-icon">📊</div>
                 <div>
                   <div className="card-title">Current Monthly Performance</div>
-                  <div className="card-subtitle">Enter your average monthly figures, use Google Analytics or Google Ads as appropriate</div>
+                  <div className="card-subtitle">Enter your average monthly figures (use GA4 or Google Ads as appropriate)</div>
                 </div>
               </div>
 
               <div className="form-grid">
-                <div className="form-group" id="grp_sessions">
-                  <label htmlFor="sessions">Avg Monthly Sessions <span className="lbl-hint">(GA4 &rarr; Reports &rarr; Traffic)</span></label>
-                  <input type="number" id="sessions" placeholder="e.g. 500,000" min="0" />
+                <div className="form-group">
+                  <label htmlFor="sessions">Avg Monthly Sessions</label>
+                  <input
+                    type="number"
+                    id="sessions"
+                    placeholder="e.g. 500,000"
+                    value={sessionsInput}
+                    onChange={e => setSessionsInput(e.target.value)}
+                  />
                 </div>
 
-                <div className="form-group" id="grp_conversions">
-                  <label htmlFor="conversions">Avg Monthly Conversions / Leads <span className="lbl-hint">(GA4 &rarr; Conversions)</span></label>
-                  <input type="number" id="conversions" placeholder="e.g. 5,000" min="0" />
+                <div className="form-group">
+                  <label htmlFor="conversions">Avg Monthly Conversions / Leads</label>
+                  <input
+                    type="number"
+                    id="conversions"
+                    placeholder="e.g. 5,000"
+                    value={conversionsInput}
+                    onChange={e => setConversionsInput(e.target.value)}
+                  />
                 </div>
 
-                <div className="form-group" id="grp_search_traffic">
-                  <label htmlFor="paid_search_pct">Traffic from Paid Search <span className="lbl-hint">(%)</span></label>
+                <div className="form-group full">
+                  <label htmlFor="aov">Average Conversion / Order Value (£)</label>
                   <div className="input-wrap">
-                    <input type="number" id="paid_search_pct" placeholder="e.g. 45" min="0" max="100" style={{ paddingRight: "2rem" }} />
-                    <span className="suffix">%</span>
-                  </div>
-                </div>
-
-                <div className="form-group" id="grp_video_traffic">
-                  <label htmlFor="dv_pct">Traffic from Display &amp; Video <span className="lbl-hint">(%)</span></label>
-                  <div className="input-wrap">
-                    <input type="number" id="dv_pct" placeholder="e.g. 15" min="0" max="100" style={{ paddingRight: "2rem" }} />
-                    <span className="suffix">%</span>
-                  </div>
-                </div>
-
-                <div className="form-group" id="grp_social_traffic">
-                  <label htmlFor="paid_social_pct">Traffic from Paid Social <span className="lbl-hint">(%)</span></label>
-                  <div className="input-wrap">
-                    <input type="number" id="paid_social_pct" placeholder="e.g. 20" min="0" max="100" style={{ paddingRight: "2rem" }} />
-                    <span className="suffix">%</span>
-                  </div>
-                </div>
-
-                <div className="form-group" id="grp_search_spend">
-                  <label htmlFor="search_spend"><span id="search_spend_label">Monthly Google Ads Spend</span> <span className="lbl-hint">(optional, for ROAS)</span></label>
-                  <div className="input-wrap">
-                    <input type="number" id="search_spend" placeholder="e.g. 1,000,000" min="0" style={{ paddingLeft: "1.6rem" }} />
-                    <span className="suffix" style={{ left: "0.85rem", right: "auto" }}>£</span>
-                  </div>
-                </div>
-
-                <div className="form-group" id="grp_video_spend">
-                  <label htmlFor="dv_spend">Display &amp; Video Ad Spend <span className="lbl-hint">(optional, for ROAS)</span></label>
-                  <div className="input-wrap">
-                    <input type="number" id="dv_spend" placeholder="e.g. 25,000" min="0" style={{ paddingLeft: "1.6rem" }} />
-                    <span className="suffix" style={{ left: "0.85rem", right: "auto" }}>£</span>
-                  </div>
-                </div>
-
-                <div className="form-group" id="grp_social_spend">
-                  <label htmlFor="social_spend">Social Ad Spend <span className="lbl-hint">(optional, for ROAS)</span></label>
-                  <div className="input-wrap">
-                    <input type="number" id="social_spend" placeholder="e.g. 20,000" min="0" style={{ paddingLeft: "1.6rem" }} />
-                    <span className="suffix" style={{ left: "0.85rem", right: "auto" }}>£</span>
-                  </div>
-                </div>
-
-                <div className="form-group full" id="grp_aov">
-                  <label htmlFor="aov">Average Conversion Value <span className="lbl-hint">(used to translate extra conversions into revenue)</span></label>
-                  <div className="input-wrap">
-                    <input type="number" id="aov" placeholder="e.g. 100" min="0" defaultValue="100" style={{ paddingLeft: "1.6rem" }} />
+                    <input
+                      type="number"
+                      id="aov"
+                      placeholder="e.g. 100"
+                      value={aovInput}
+                      onChange={e => setAovInput(e.target.value)}
+                      style={{ paddingLeft: "1.6rem" }}
+                    />
                     <span className="suffix" style={{ left: "0.85rem", right: "auto" }}>£</span>
                   </div>
                   <div className="hint-box">
-                    💡 This is the average revenue (or lead value) per conversion. We pre-fill £50 as an industry default. Please edit to match your business, or it will carry over from the Data Strength Calculator (your Algo's diet check) if you've used it.
+                    💡 This is the average revenue (or lead value) per conversion. We pre-fill £100 as an industry default.
                   </div>
                 </div>
               </div>
@@ -238,33 +541,137 @@ export default function AIValueCalculator() {
 
             <div className="btn-actions">
               <button className="btn btn-ghost" type="button" onClick={() => goToStep(1)}>&larr; Back</button>
-              <button className="btn btn-primary" type="button" onClick={() => goToStep(3)}>Calculate AI Value &rarr;</button>
+              <button className="btn btn-primary" type="button" onClick={() => goToStep(3)}>
+                Calculate AI Value &rarr;
+              </button>
             </div>
           </div>
         )}
 
-        {/* STEP 3 */}
+        {/* STEP 3: Results */}
         {currentStep === 3 && (
           <div className="step active">
-            <div id="resultsContent" />
+            <div className="card">
+              <div className="card-header">
+                <div className="card-icon">📈</div>
+                <div>
+                  <div className="card-title">Estimated Monthly AI Opportunity</div>
+                  <div className="card-subtitle">
+                    Based on your unadopted AI features, here is the potential monthly performance uplift.
+                  </div>
+                </div>
+              </div>
+
+              <div className="metrics-row">
+                <div className="metric-card">
+                  <div className="metric-lbl">Current Monthly Conversions</div>
+                  <div className="metric-val">{fmt(results.baseConversions)}</div>
+                  <div className="metric-sub">Base performance</div>
+                </div>
+
+                <div className="metric-card uplift">
+                  <div className="metric-lbl">Est. Incremental Conversions</div>
+                  <div className="metric-val">+{fmt(results.totalIncConversions)}</div>
+                  <div className="metric-up">+{results.overallUpliftPct.toFixed(1)}% Uplift</div>
+                </div>
+
+                <div className="metric-card uplift-conv">
+                  <div className="metric-lbl">Est. Monthly Inc. Revenue</div>
+                  <div className="metric-val">&pound;{fmt(results.totalIncRevenue)}</div>
+                  <div className="metric-sub">at &pound;{results.aov} per conversion</div>
+                </div>
+              </div>
+
+              {results.breakdown.length === 0 ? (
+                <div className="no-features-msg">
+                  🎉 Great job! You have fully adopted all selected AI features. Your Algo is fully fed!
+                </div>
+              ) : (
+                <>
+                  <div className="card-title" style={{ marginTop: "1.5rem", marginBottom: "0.75rem" }}>
+                    Opportunity Breakdown by Feature
+                  </div>
+                  {results.breakdown.map(b => (
+                    <div className="feat-card" key={b.feature.id}>
+                      <div className="fc-top">
+                        <div className="fc-name">{b.feature.name}</div>
+                        <div className="fc-uplift">
+                          +{fmt(b.incConversions)} extra conversions/mo
+                        </div>
+                      </div>
+                      <div className="fc-metric">
+                        Est. +&pound;{fmt(b.incRevenue)} / month
+                      </div>
+                      <div className="fc-why">{b.feature.desc}</div>
+                      <div className="fc-foot">
+                        Current adoption: {b.adoption}% &bull; Unlocked potential: +{b.avgUpliftPct.toFixed(1)}% max uplift
+                      </div>
+                    </div>
+                  ))}
+                </>
+              )}
+            </div>
+
             <div className="btn-actions">
               <button className="btn btn-ghost" type="button" onClick={() => goToStep(2)}>&larr; Revise Inputs</button>
               <div style={{ display: "flex", gap: "0.75rem" }}>
-                <button className="btn btn-pdf" type="button">⬇ Download PDF</button>
+                <button className="btn btn-pdf" type="button" onClick={() => window.print()}>⬇ Download PDF</button>
                 <button className="btn btn-primary" type="button" onClick={() => goToStep(4)}>What's Next &rarr;</button>
               </div>
             </div>
           </div>
         )}
 
-        {/* STEP 4 */}
+        {/* STEP 4: What's Next & Roadmap */}
         {currentStep === 4 && (
           <div className="step active">
-            <div id="step4Content" />
+            <div className="card">
+              <div className="card-header">
+                <div className="card-icon">🚀</div>
+                <div>
+                  <div className="card-title">Implementation Roadmap &amp; Next Steps</div>
+                  <div className="card-subtitle">Recommended priority sequence to adopt your unmanaged AI features</div>
+                </div>
+              </div>
+
+              {results.breakdown.length === 0 ? (
+                <div className="no-features-msg">
+                  Your AI media stack is operating at peak maturity. Maintain your data feeding pipeline to keep AI bidding algorithms accurate!
+                </div>
+              ) : (
+                <div className="priority-note">
+                  <strong>Recommended Priority:</strong> Start with foundational measurement features (Enhanced Conversions, Consent Mode) before scaling campaign bidding algorithms like Performance Max and Value-Based Bidding.
+                </div>
+              )}
+
+              <hr className="section-divider" />
+
+              <div className="card-title" style={{ marginBottom: "0.75rem" }}>
+                Request an Algo Audit &amp; Implementation Plan
+              </div>
+              <div className="cta-form">
+                <div className="form-group">
+                  <label htmlFor="cta_name">Name</label>
+                  <input type="text" id="cta_name" placeholder="Your Name" />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="cta_email">Work Email</label>
+                  <input type="email" id="cta_email" placeholder="name@company.com" />
+                </div>
+                <div className="form-group full">
+                  <label htmlFor="cta_company">Company Name</label>
+                  <input type="text" id="cta_company" placeholder="Company Ltd" />
+                </div>
+              </div>
+              <div className="form-note">
+                🔒 Your details will only be used by dentsu/Algo specialists to provide your custom media audit.
+              </div>
+            </div>
+
             <div className="btn-actions">
               <button className="btn btn-ghost" type="button" onClick={() => goToStep(3)}>&larr; Back to Results</button>
               <div style={{ display: "flex", gap: "0.75rem" }}>
-                <button className="btn btn-pdf" type="button">⬇ Download PDF</button>
+                <button className="btn btn-pdf" type="button" onClick={() => window.print()}>⬇ Download PDF</button>
                 <button className="btn btn-ghost" type="button" onClick={() => goToStep(1)}>Start Over</button>
               </div>
             </div>
