@@ -1,9 +1,19 @@
 import { Link } from "react-router-dom";
 import heroImg from "../../assets/calculators_algo_hero.png";
+import logoImg from "../../assets/hero.png"; // or your logo image
 
 export default function CalculatorsIndex() {
   return (
-    <div className="container">
+    <div className="calculator-page">
+      {/* Top Blue Nav Bar */}
+      <nav>
+        <div className="nav-logo">
+          <img src={logoImg} alt="Algo" />
+          <span>Algo.</span>
+        </div>
+        <div className="nav-right">Calculator Suite</div>
+      </nav>
+
       <div className="hero-stack">
         <div className="hero-mascot">
           <img src={heroImg} alt="Algo" />
@@ -22,45 +32,47 @@ export default function CalculatorsIndex() {
         </div>
       </div>
 
-      <div className="choices">
-        <Link className="choice data" to="/calculators/data-strength-calculator">
-          <div className="choice-icon">🥣</div>
-          <h2>Data Strength Calculator</h2>
-          <p>
-            Estimate the uplift in session visibility and conversion tracking
-            from enabling data-strengthening features, including Consent Mode,
-            Enhanced Conversions, server-side tagging and more.
-          </p>
-          <div className="tags">
-            <span className="tag">Consent Mode</span>
-            <span className="tag">Enhanced Conversions</span>
-            <span className="tag">sGTM</span>
-            <span className="tag">BigQuery</span>
-          </div>
-          <span className="choice-cta">Check your Algo's diet &rarr;</span>
-        </Link>
+      <div className="container">
+        <div className="choices">
+          <Link className="choice data" to="/calculators/data-strength-calculator">
+            <div className="choice-icon">🥣</div>
+            <h2>Data Strength Calculator</h2>
+            <p>
+              Estimate the uplift in session visibility and conversion tracking
+              from enabling data-strengthening features, including Consent Mode,
+              Enhanced Conversions, server-side tagging and more.
+            </p>
+            <div className="tags">
+              <span className="tag">Consent Mode</span>
+              <span className="tag">Enhanced Conversions</span>
+              <span className="tag">sGTM</span>
+              <span className="tag">BigQuery</span>
+            </div>
+            <span className="choice-cta">Check your Algo's diet &rarr;</span>
+          </Link>
 
-        <Link className="choice ai" to="/calculators/ai-value-calculator">
-          <div className="choice-icon">🤖</div>
-          <h2>AI Value Calculator</h2>
-          <p>
-            Estimate the incremental conversions and revenue AI-powered
-            features could drive such as; Performance Max, Broad Match, Demand
-            Gen, Value-Based Bidding, propensity modelling and more.
-          </p>
-          <div className="tags">
-            <span className="tag">Performance Max</span>
-            <span className="tag">Broad Match</span>
-            <span className="tag">Demand Gen</span>
-            <span className="tag">VBB</span>
-          </div>
-          <span className="choice-cta">See what your Algo can do &rarr;</span>
-        </Link>
+          <Link className="choice ai" to="/calculators/ai-value-calculator">
+            <div className="choice-icon">🤖</div>
+            <h2>AI Value Calculator</h2>
+            <p>
+              Estimate the incremental conversions and revenue AI-powered
+              features could drive such as; Performance Max, Broad Match, Demand
+              Gen, Value-Based Bidding, propensity modelling and more.
+            </p>
+            <div className="tags">
+              <span className="tag">Performance Max</span>
+              <span className="tag">Broad Match</span>
+              <span className="tag">Demand Gen</span>
+              <span className="tag">VBB</span>
+            </div>
+            <span className="choice-cta">See what your Algo can do &rarr;</span>
+          </Link>
+        </div>
+
+        <p className="link-note">
+          💡 The two calculators share what you enter. Ingredients measured in one feed straight into the other, so it doesn't matter which bowl you start with.
+        </p>
       </div>
-
-      <p className="link-note">
-        💡 The two calculators share what you enter. Ingredients measured in one feed straight into the other, so it doesn't matter which bowl you start with.
-      </p>
 
       <footer>&copy; dentsu 2026 &middot; Algo &middot; Calculator Suite</footer>
     </div>
