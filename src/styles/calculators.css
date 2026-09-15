@@ -51,13 +51,14 @@
 
 /* ── Nav ── */
 .calculator-page nav {
-  background: var(--navy);
+  background: #14213D;
   padding: 0 2rem;
   height: 58px;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
+
 .calculator-page .nav-logo { display: flex; align-items: center; gap: 0.55rem; }
 .calculator-page .nav-logo img { height: 36px; width: auto; display: block; max-width: none; }
 .calculator-page .nav-logo span { color: #fff; font-family: 'Baloo 2', sans-serif; font-weight: 700; font-size: 1.05rem; }
@@ -600,4 +601,15 @@
   .calculator-page .cta-form { grid-template-columns: 1fr; }
   .calculator-page .gantt-header-row, 
   .calculator-page .gantt-feature-row { grid-template-columns: 110px 1fr; }
+}
+
+.calculator-page footer {
+  background: #14213D !important;
+  color: rgba(255, 255, 255, 0.55) !important;
+  text-align: center !important;
+  padding: 1.25rem 1rem !important;
+  font-size: 0.75rem !important;
+  margin-top: 3rem !important;
+  width: 100% !important;
+  display: block !important;
 }
