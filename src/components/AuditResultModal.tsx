@@ -23,7 +23,7 @@ type Answers = Partial<Record<CKey, number>>;
 type Status = "idle" | "submitting" | "success" | "error";
 
 // TODO: replace with the live Algo Calculators URL once deployed.
-const ALGO_CALCULATORS_URL = "https://calculators.feedingalgo.com";
+const ALGO_CALCULATORS_URL = "https://feedingalgo.com/calculators";
 
 interface Props {
   open: boolean;

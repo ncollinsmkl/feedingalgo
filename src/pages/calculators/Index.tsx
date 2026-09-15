@@ -5,7 +5,7 @@ export default function CalculatorsIndex() {
     <div className="container">
       <div className="hero-stack">
         <div className="hero-mascot">
-          <img src="/assets/hero.png" alt="Algo" />
+          <img src="/assets/calculators_algo_hero.png" alt="Algo" />
         </div>
         <div className="hero">
           <h1>Which calculator would you like to use?</h1>

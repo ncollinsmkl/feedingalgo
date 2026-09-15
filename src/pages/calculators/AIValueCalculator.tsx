@@ -11,7 +11,7 @@ export default function AIValueCalculator() {
 
       <div className="hero-stack">
         <div className="hero-mascot-big">
-          <img src="/assets/hero.png" alt="Algo the bear thinking" />
+          <img src="/assets/ai_value_algo_hero.png" alt="Algo the bear thinking" />
         </div>
         <div className="hero">
           <h1>AI Value Calculator</h1>

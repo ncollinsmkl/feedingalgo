@@ -11,7 +11,7 @@ export default function DataStrengthCalculator() {
 
       <div className="hero-stack">
         <div className="hero-mascot-big">
-          <img src="/assets/hero.png" alt="Algo the bear flexing" />
+          <img src="/assets/data_strength_algo_hero.png" alt="Algo the bear flexing" />
         </div>
         <div className="hero">
           <h1>Data Strength Calculator</h1>
