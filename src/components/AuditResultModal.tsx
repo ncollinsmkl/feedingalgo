@@ -22,6 +22,9 @@ import styles from "./AuditResultModal.module.css";
 type Answers = Partial<Record<CKey, number>>;
 type Status = "idle" | "submitting" | "success" | "error";
 
+// TODO: replace with the live Algo Calculators URL once deployed.
+const ALGO_CALCULATORS_URL = "https://calculators.feedingalgo.com";
+
 interface Props {
   open: boolean;
   onClose: () => void;
@@ -125,6 +128,14 @@ export default function AuditResultModal({
                 Your results are on their way to the team. We'll be in
                 touch with a detailed breakdown shortly.
               </p>
+              <a
+                href={ALGO_CALCULATORS_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`btn-cta ${styles.calculatorsCta}`}
+              >
+                Explore the Algo Calculators →
+              </a>
             </div>
           ) : (
             <>
