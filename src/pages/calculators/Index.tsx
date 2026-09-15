@@ -1,11 +1,12 @@
 import { Link } from "react-router-dom";
+import heroImg from "../../assets/calculators_algo_hero.png";
 
 export default function CalculatorsIndex() {
   return (
     <div className="container">
       <div className="hero-stack">
         <div className="hero-mascot">
-          <img src="/assets/calculators_algo_hero.png" alt="Algo" />
+          <img src={heroImg} alt="Algo" />
         </div>
         <div className="hero">
           <h1>Which calculator would you like to use?</h1>
