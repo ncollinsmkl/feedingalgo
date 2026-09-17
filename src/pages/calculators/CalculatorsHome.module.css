@@ -1,0 +1,254 @@
+/* Calculators landing page — scoped design tokens.
+ * These intentionally mirror the standalone calculator prototype's palette
+ * rather than the main site's tokens (src/styles/tokens.css), since the
+ * calculator suite has its own distinct visual identity. */
+.page {
+  --cream: #fbf1e3;
+  --cream-2: #f5e7d2;
+  --navy: #14213d;
+  --navy-light: #1e3054;
+  --orange: #ef7f3b;
+  --orange-dim: rgba(239, 127, 59, 0.14);
+  --consent: #e15c4f;
+  --collect: #ef9a3b;
+  --curate: #4c86d6;
+  --combine: #5aa96b;
+  --connect: #9b65c9;
+  --white: #ffffff;
+  --bg: var(--cream);
+  --border: #e9dcc4;
+  --text: #23283a;
+  --muted: #7a7263;
+  --green: #5aa96b;
+
+  font-family: "Nunito Sans", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+.page h1,
+.page h2 {
+  font-family: "Baloo 2", -apple-system, sans-serif;
+}
+
+.nav {
+  background: var(--navy);
+  padding: 0 2rem;
+  height: 58px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.navLogo {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  text-decoration: none;
+}
+.navLogo img {
+  height: 34px;
+  width: auto;
+  display: block;
+}
+.navLogo span {
+  color: #fff;
+  font-family: "Baloo 2", sans-serif;
+  font-weight: 700;
+  font-size: 1.05rem;
+  letter-spacing: 0.01em;
+}
+.navRight {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.8rem;
+  letter-spacing: 0.03em;
+}
+
+.container {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem 4rem;
+}
+
+.heroStack {
+  position: relative;
+  margin-bottom: 3.5rem;
+}
+.heroMascot {
+  display: flex;
+  justify-content: center;
+  padding-top: 1.5rem;
+  position: relative;
+  z-index: 1;
+}
+.heroMascot img {
+  height: 460px;
+  width: auto;
+  filter: drop-shadow(0 12px 22px rgba(20, 33, 61, 0.18));
+  display: block;
+}
+.hero {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 3rem);
+  max-width: 920px;
+  top: 52%;
+  z-index: 2;
+  background: var(--navy);
+  border-radius: 28px;
+  text-align: center;
+  padding: 3.5rem 1.5rem 2.5rem;
+}
+.hero h1 {
+  font-size: 2.15rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 0.7rem;
+}
+.hero p {
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 1rem;
+  max-width: 560px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+.heroSiteLink {
+  margin-top: 1.1rem !important;
+  font-size: 0.9rem !important;
+}
+.heroSiteLink a {
+  color: var(--collect);
+  font-weight: 700;
+  text-decoration: none;
+  border-bottom: 1.5px solid rgba(239, 154, 59, 0.4);
+  transition: border-color 0.15s;
+}
+.heroSiteLink a:hover {
+  border-color: var(--collect);
+}
+
+@media (max-width: 680px) {
+  .heroMascot {
+    padding-top: 1rem;
+  }
+  .heroMascot img {
+    height: 300px;
+  }
+  .hero {
+    padding: 2.5rem 1.25rem 2rem;
+    top: 52%;
+    border-radius: 22px;
+  }
+}
+
+.choices {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+  margin-top: 2.5rem;
+}
+@media (max-width: 680px) {
+  .choices {
+    grid-template-columns: 1fr;
+  }
+}
+
+.choice {
+  display: flex;
+  flex-direction: column;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 2rem 1.75rem;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+.choice::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 5px;
+}
+.choiceData::before {
+  background: linear-gradient(90deg, var(--consent), var(--curate));
+}
+.choiceAi::before {
+  background: linear-gradient(90deg, var(--connect), var(--curate));
+}
+.choice:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 36px rgba(20, 33, 61, 0.12);
+}
+.choiceData:hover {
+  border-color: var(--consent);
+}
+.choiceAi:hover {
+  border-color: var(--connect);
+}
+.choiceIcon {
+  font-size: 2rem;
+  margin-bottom: 0.9rem;
+}
+.choice h2 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 0.5rem;
+}
+.choice p {
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  flex: 1;
+  margin-bottom: 1.25rem;
+}
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: 1.25rem;
+}
+.tag {
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 0.25rem 0.6rem;
+  border-radius: 999px;
+  background: var(--cream-2);
+  color: var(--muted);
+  border: 1px solid var(--border);
+}
+.choiceCta {
+  font-weight: 700;
+  font-size: 0.92rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+.choiceData .choiceCta {
+  color: var(--consent);
+}
+.choiceAi .choiceCta {
+  color: var(--connect);
+}
+
+.linkNote {
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.82rem;
+  margin-top: 2rem;
+  line-height: 1.6;
+}
+
+.footer {
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.75rem;
+  padding: 2rem 1rem 3rem;
+}

@@ -1,0 +1,127 @@
+.featureRow {
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--border);
+}
+.featureRow:last-child {
+  border-bottom: none;
+}
+.featureName {
+  font-weight: 600;
+  font-size: 0.875rem;
+  color: var(--navy);
+}
+.featureDesc {
+  font-size: 0.75rem;
+  color: var(--muted);
+  margin-top: 3px;
+  line-height: 1.45;
+}
+
+.featureNameRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+.naToggleInline {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  flex-shrink: 0;
+}
+.naToggleInline input[type="checkbox"] {
+  width: 14px;
+  height: 14px;
+  accent-color: var(--muted);
+  cursor: pointer;
+}
+.naToggleInline label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--muted);
+  cursor: pointer;
+  user-select: none;
+  white-space: nowrap;
+}
+
+.sliderWrap {
+  margin-top: 0.85rem;
+}
+.sliderWrap.isNa .ticks,
+.sliderWrap.isNa .readout {
+  opacity: 0.35;
+}
+
+.slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 6px;
+  border-radius: 999px;
+  background: linear-gradient(
+    90deg,
+    var(--red) 0%,
+    #e08a3e 25%,
+    var(--collect) 50%,
+    #8fb84a 75%,
+    var(--green) 100%
+  );
+  outline: none;
+  cursor: pointer;
+  display: block;
+}
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #fff;
+  border: 3px solid var(--navy);
+  cursor: pointer;
+  box-shadow: 0 1px 4px rgba(20, 33, 61, 0.3);
+}
+.slider::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #fff;
+  border: 3px solid var(--navy);
+  cursor: pointer;
+  box-shadow: 0 1px 4px rgba(20, 33, 61, 0.3);
+}
+.slider::-moz-range-track {
+  background: transparent;
+}
+.slider:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+.slider:disabled::-webkit-slider-thumb {
+  cursor: not-allowed;
+}
+
+.ticks {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.4rem;
+  font-size: 0.66rem;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.readout {
+  margin-top: 0.55rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.3rem 0.7rem;
+  border-radius: 12px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  transition: all 0.15s;
+}
+.readoutPct {
+  font-size: 0.92rem;
+  font-weight: 800;
+}
