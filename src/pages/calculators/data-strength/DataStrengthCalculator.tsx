@@ -262,7 +262,7 @@ export default function DataStrengthCalculator() {
         </div>
       </div>
 
-      <footer className={styles.footer}>© dentsu 2026 · Algo · Data Strength Calculator</footer>
+      <footer className={styles.footer}>© Strong Data 2026 · Algo · Data Strength Calculator</footer>
     </div>
   );
 }

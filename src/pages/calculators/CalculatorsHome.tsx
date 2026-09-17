@@ -100,7 +100,7 @@ export default function CalculatorsHome() {
       </div>
 
       <footer className={styles.footer}>
-        © dentsu 2026 · Algo · Calculator Suite
+        © Strong Data 2026 · Algo · Calculator Suite
       </footer>
     </div>
   );

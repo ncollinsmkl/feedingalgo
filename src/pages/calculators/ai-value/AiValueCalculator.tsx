@@ -246,7 +246,7 @@ export default function AiValueCalculator() {
         </div>
       </div>
 
-      <footer className={styles.footer}>© dentsu 2026 · Algo · AI Value Calculator</footer>
+      <footer className={styles.footer}>© Strong Data 2026 · Algo · AI Value Calculator</footer>
     </div>
   );
 }
