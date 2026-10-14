@@ -138,7 +138,8 @@ export default function AlgoAudit({ variant = "matrix", embedded = false }: Prop
         <h2 className={styles.heading}>
           How Strong Is Your Data?
           <span className={styles.sub}>
-            Take our “Algo Audit” and see how happy your data makes him
+Take our simple "Algo Audit" below, or for a more detailed assessment use our{' '}
+          <a href="https://feedingalgo.com/calculators">Algo Calculators</a>
           </span>
         </h2>
         {panel}
