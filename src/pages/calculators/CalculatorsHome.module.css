@@ -140,6 +140,9 @@
     padding: 2.5rem 1.25rem 2rem;
     top: 52%;
     border-radius: 22px;
+    position: relative;
+    margin-top: -100px;
+    margin-bottom: -100px;
   }
 }
 
