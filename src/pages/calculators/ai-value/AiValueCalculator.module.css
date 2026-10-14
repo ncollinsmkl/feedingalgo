@@ -127,6 +127,9 @@
   .hero {
     padding: 2.5rem 1.25rem 2rem;
     top: 55%;
+    position: relative;
+    margin-top: -144px;
+    margin-bottom: -65px;
   }
 }
 
