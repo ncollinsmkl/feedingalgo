@@ -139,7 +139,7 @@ export default function AlgoAudit({ variant = "matrix", embedded = false }: Prop
           How Strong Is Your Data?
           <span className={styles.sub}>
 Take our simple "Algo Audit" below, or for a more detailed assessment use our{' '}
-          <a href="https://feedingalgo.com/calculators">Algo Calculators</a>
+          <a href="https://feedingalgo.com/calculators" style={{ textDecoration: 'underline' }}> Algo Calculators</a>
           </span>
         </h2>
         {panel}
